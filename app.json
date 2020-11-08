@@ -4,7 +4,7 @@
     "slug": "harptos-calendar",
     "privacy": "unlisted",
     "androidStatusBar": {
-      "backgroundColor": "#E3B468",
+      "backgroundColor": "#F0BE8F",
       "translucent": false,
       "barStyle": "dark-content"
     },
