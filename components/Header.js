@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { Icon } from "native-base";
 
 import Colors from "../constants/Colors";
+import Theme from "../utils/Theme";
 
 export default class Header extends React.Component {
   render() {
@@ -10,7 +11,9 @@ export default class Header extends React.Component {
 
     return (
       <View style={[styles.header, hasShadow && styles.headerShadow]}>
-        <Text>{title}</Text>
+        <View style={styles.column}>
+          <Text style={styles.titleStyle}>{title}</Text>
+        </View>
       </View>
     );
   }
@@ -45,4 +48,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
   },
+  titleStyle: {
+    color: Colors.black,
+    fontSize: Theme.responsiveFontSize(18),
+    fontWeight: "bold",
+  }
 });
