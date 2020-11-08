@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Icon } from "native-base";
 
 import Colors from "../constants/Colors";
@@ -7,11 +13,24 @@ import Theme from "../utils/Theme";
 
 export default class Header extends React.Component {
   render() {
-    let { hasShadow, title } = this.props;
+    let { hasShadow, navigation, title } = this.props;
+    let index = navigation.canGoBack();
 
     return (
       <View style={[styles.header, hasShadow && styles.headerShadow]}>
         <View style={styles.column}>
+          {Platform.OS === "ios" && index && (
+            <TouchableOpacity
+              style={styles.headerButton}
+              onPress={() => navigation.goBack()}
+            >
+              <Icon
+                style={styles.headerIcon}
+                type="MaterialIcons"
+                name="arrow-back"
+              />
+            </TouchableOpacity>
+          )}
           <Text style={styles.titleStyle}>{title}</Text>
         </View>
       </View>
@@ -47,10 +66,20 @@ const styles = StyleSheet.create({
   column: {
     alignItems: "center",
     flexDirection: "row",
+    padding: 5,
+  },
+  headerButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingRight: 10,
+  },
+  headerIcon: {
+    color: Colors.black,
+    fontSize: Theme.responsiveFontSize(25),
   },
   titleStyle: {
     color: Colors.black,
     fontSize: Theme.responsiveFontSize(18),
     fontWeight: "bold",
-  }
+  },
 });
