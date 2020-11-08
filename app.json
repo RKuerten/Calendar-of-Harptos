@@ -1,0 +1,62 @@
+{
+  "expo": {
+    "name": "Harptos Calendar",
+    "slug": "harptos-calendar",
+    "privacy": "unlisted",
+    "androidStatusBar": {
+      "backgroundColor": "#E3B468",
+      "translucent": false,
+      "barStyle": "dark-content"
+    },
+    "packagerOpts": {
+      "config": "metro.config.js",
+      "sourceExts": [
+        "expo.ts",
+        "expo.tsx",
+        "expo.js",
+        "expo.jsx",
+        "ts",
+        "tsx",
+        "js",
+        "jsx",
+        "json",
+        "wasm",
+        "svg"
+      ]
+    },
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "cover"
+    },
+    "notification": {
+      "icon": "./assets/images/icon-mini.png"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "icon": "./assets/images/icon.png",
+      "bundleIdentifier": "br.com.kuerten.harptos",
+      "buildNumber": "0.0.1"
+    },
+    "android": {
+      "package": "br.com.kuerten.harptos",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundImage": "./assets/images/adaptive-background.png"
+      }
+    }
+  }
+}
