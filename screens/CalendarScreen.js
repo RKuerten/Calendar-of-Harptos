@@ -5,7 +5,7 @@ import { Container, Icon } from "native-base";
 import { Content } from "../components";
 import Colors from "../constants/Colors";
 
-export default class Calendar extends React.Component {
+export default class CalendarScreen extends React.Component {
   state = {};
 
   render() {
