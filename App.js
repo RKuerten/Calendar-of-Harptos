@@ -4,12 +4,22 @@ import * as Font from "expo-font";
 import React, { useState } from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { Provider as PaperProvider } from "react-native-paper";
+import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import { Root } from "native-base";
 
 import { AppNavigator } from "./navigation/AppNavigator";
 import Colors from "./constants/Colors";
+
+const theme = {
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: Colors.tintColor,
+    accent: Colors.tintColor,
+  },
+};
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -26,7 +36,7 @@ export default function App(props) {
     return (
       <NavigationContainer>
         <Root>
-          <PaperProvider>
+          <PaperProvider theme={theme}>
             <View style={styles.container}>
               {Platform.OS === "ios" && <StatusBar barStyle="default" />}
               <AppNavigator />
