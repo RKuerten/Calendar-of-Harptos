@@ -5,6 +5,7 @@ export default {
   black: "#000",
   white: "#FFF",
   background: "#F4F4F4",
+  dayBorder: "#DFDFDF",
   successBackground: "#6CB14B",
   errorBackground: "red",
   warningBackground: "#E5BA49",
