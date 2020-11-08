@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Text, Icon } from "native-base";
+import { StyleSheet, Text, View } from "react-native";
+import { Icon } from "native-base";
 
 import Colors from "../constants/Colors";
 
@@ -50,13 +50,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   }),
   iconStyle: (direction) => ({
-    color: Colors.tintColor,
+    color: Colors.black,
     fontSize: 24,
     marginLeft: direction === "ltr" ? 0 : 5,
     marginRight: direction === "ltr" ? 5 : 0,
   }),
   textStyle: {
-    color: Colors.tintColor,
+    color: Colors.black,
     fontWeight: "bold",
     fontSize: 14,
   },

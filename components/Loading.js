@@ -5,7 +5,7 @@ import Colors from "../constants/Colors";
 
 const Loading = ({ title, style = {} }) => (
   <View style={[styles.viewBox, style]}>
-    <Spinner color={Colors.grayText} />
+    <Spinner color={Colors.black} />
     <Text style={styles.textStyle}>{title ? title : "Carregando..."}</Text>
   </View>
 );
