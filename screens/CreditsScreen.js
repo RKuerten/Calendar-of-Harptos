@@ -12,7 +12,7 @@ export default class CreditsScreen extends React.Component {
 
     return (
       <Container>
-        <Header navigation={navigation} title="Créditos" />
+        <Header navigation={navigation} title="Credits" />
         <Content>
           <View style={styles.container}>
             <Text style={styles.text}>
