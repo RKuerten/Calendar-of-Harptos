@@ -81,5 +81,6 @@ const styles = StyleSheet.create({
     color: Colors.black,
     fontSize: Theme.responsiveFontSize(18),
     fontWeight: "bold",
+    marginLeft: 5,
   },
 });
