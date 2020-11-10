@@ -1,12 +1,10 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { DataTable, FAB, Portal } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
+import { FAB, Portal } from "react-native-paper";
 import { useIsFocused } from "@react-navigation/native";
 import { Container } from "native-base";
 
-import { Content, Header } from "../components";
-import Colors from "../constants/Colors";
-import Theme from "../utils/Theme";
+import { CalendarSwitch, Content, Header, Month } from "../components";
 
 class CalendarClass extends React.Component {
   constructor(props) {
@@ -48,33 +46,9 @@ class CalendarClass extends React.Component {
         </Portal>
         <Content>
           <View style={styles.container}>
-            <View style={styles.monthRow}>
-              {Array.from(Array(10), (e, i) => i + 1).map(
-                (day, key, { length }) => (
-                  <View style={styles.dayBox(length - 1 === key)} key={key}>
-                    <Text style={styles.dayText}>{day}</Text>
-                  </View>
-                )
-              )}
-            </View>
-            <View style={styles.monthRow}>
-              {Array.from(Array(10), (e, i) => i + 11).map(
-                (day, key, { length }) => (
-                  <View style={styles.dayBox(length - 1 === key)} key={key}>
-                    <Text style={styles.dayText}>{day}</Text>
-                  </View>
-                )
-              )}
-            </View>
-            <View style={styles.monthRow}>
-              {Array.from(Array(10), (e, i) => i + 21).map(
-                (day, key, { length }) => (
-                  <View style={styles.dayBox(length - 1 === key)} key={key}>
-                    <Text style={styles.dayText}>{day}</Text>
-                  </View>
-                )
-              )}
-            </View>
+            <CalendarSwitch title="Year" />
+            <CalendarSwitch title="Month" />
+            <Month />
           </View>
         </Content>
       </Container>
@@ -89,27 +63,9 @@ export default function CalendarScreen(props) {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
+    flex: 1,
     alignItems: "center",
-    padding: 20,
-  },
-  monthRow: {
-    display: "flex",
-    flexDirection: "row",
-    borderColor: Colors.dayBorder,
-    borderWidth: 1,
-  },
-  dayBox: (last) => ({
-    alignItems: "center",
-    justifyContent: "center",
-    borderColor: Colors.dayBorder,
-    borderRightWidth: last ? 0 : 1,
-    padding: Theme.relativeWidth(2),
-  }),
-  dayText: {
-    color: Colors.black,
-    fontSize: Theme.responsiveFontSize(16),
-    width: Theme.responsiveFontSize(16) + 2,
-    textAlign: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
 });
