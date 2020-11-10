@@ -38,6 +38,11 @@ export default class Month extends React.Component {
         <View style={styles.holidayRow}>
           <Text style={styles.holidayText}>Midwinter (Annual Holiday)</Text>
         </View>
+        <View style={styles.holidayRow}>
+          <Text style={styles.holidayText}>
+            Shieldmeet (Once Every Four Years)
+          </Text>
+        </View>
         <View style={styles.seasonRow}>
           <Text style={styles.seasonText}>Ches 19: Spring Equinox</Text>
         </View>
