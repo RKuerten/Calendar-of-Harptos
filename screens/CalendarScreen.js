@@ -3,16 +3,38 @@ import { StyleSheet, View } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { Container } from "native-base";
 
+import { months } from "../data/Months";
 import { CalendarSwitch, Content, Header, Month } from "../components";
 
 class CalendarClass extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      month: 0,
+    };
   }
 
+  _handleMonthDown = () => {
+    let { month } = this.state;
+    if (month - 1 < 0) {
+      this.setState({ month: 11 }); //add -1 to year
+    } else {
+      this.setState({ month: month - 1 });
+    }
+  };
+
+  _handleMonthUp = () => {
+    let { month } = this.state;
+    if (month + 1 > 11) {
+      this.setState({ month: 0 }); //add +1 to year
+    } else {
+      this.setState({ month: month + 1 });
+    }
+  };
+
   render() {
-    let { isFocused, navigation } = this.props;
+    let { navigation } = this.props;
+    let { month } = this.state;
 
     return (
       <Container>
@@ -23,8 +45,12 @@ class CalendarClass extends React.Component {
         <Content>
           <View style={styles.container}>
             <CalendarSwitch title="Year" />
-            <CalendarSwitch title="Month" />
-            <Month />
+            <CalendarSwitch
+              onPressLeft={() => this._handleMonthDown()}
+              onPressRight={() => this._handleMonthUp()}
+              title={months[month].name}
+            />
+            <Month month={months[month]} />
           </View>
         </Content>
       </Container>

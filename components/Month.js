@@ -5,7 +5,18 @@ import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
 
 export default class Month extends React.Component {
+  static defaultProps = {
+    month: {
+      name: "",
+      holiday: "",
+      event: "",
+      leap: false,
+    },
+  };
+
   render() {
+    let { month } = this.props;
+
     return (
       <View>
         <View style={[styles.monthRow, monthBorder[1]]}>
@@ -35,17 +46,23 @@ export default class Month extends React.Component {
             )
           )}
         </View>
-        <View style={styles.holidayRow}>
-          <Text style={styles.holidayText}>Midwinter (Annual Holiday)</Text>
-        </View>
-        <View style={styles.holidayRow}>
-          <Text style={styles.holidayText}>
-            Shieldmeet (Once Every Four Years)
-          </Text>
-        </View>
-        <View style={styles.seasonRow}>
-          <Text style={styles.seasonText}>Ches 19: Spring Equinox</Text>
-        </View>
+        {month.holiday.length > 0 && (
+          <View style={styles.holidayRow}>
+            <Text style={styles.holidayText}>{month.holiday}</Text>
+          </View>
+        )}
+        {month.leap && (
+          <View style={styles.holidayRow}>
+            <Text style={styles.holidayText}>
+              Shieldmeet (Once Every Four Years)
+            </Text>
+          </View>
+        )}
+        {month.event.length > 0 && (
+          <View style={styles.seasonRow}>
+            <Text style={styles.seasonText}>{month.event}</Text>
+          </View>
+        )}
       </View>
     );
   }
