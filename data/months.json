@@ -1,0 +1,74 @@
+{
+  "1": {
+    "name": "Hammer",
+    "holiday": "Midwinter",
+    "event": "",
+    "leap": false
+  },
+  "2": {
+    "name": "Alturiak",
+    "holiday": "",
+    "event": "",
+    "leap": false
+  },
+  "3": {
+    "name": "Ches",
+    "holiday": "",
+    "event": "Ches 19: Spring Equinox",
+    "leap": false
+  },
+  "4": {
+    "name": "Tarsakh",
+    "holiday": "Greengrass",
+    "event": "",
+    "leap": false
+  },
+  "5": {
+    "name": "Mirtul",
+    "holiday": "",
+    "event": "",
+    "leap": false
+  },
+  "6": {
+    "name": "Kythorn",
+    "holiday": "",
+    "event": "Kythorn 20: Summer Solstice",
+    "leap": false
+  },
+  "7": {
+    "name": "Flamerule",
+    "holiday": "Midsummer",
+    "event": "",
+    "leap": true
+  },
+  "8": {
+    "name": "Eleasis",
+    "holiday": "",
+    "event": "",
+    "leap": false
+  },
+  "9": {
+    "name": "Eleint",
+    "holiday": "Highharvestide",
+    "event": "Eleint 21: Autumn Equinox",
+    "leap": false
+  },
+  "10": {
+    "name": "Marpenoth",
+    "holiday": "",
+    "event": "",
+    "leap": false
+  },
+  "11": {
+    "name": "Uktar",
+    "holiday": "Feast of the Moon",
+    "event": "",
+    "leap": false
+  },
+  "12": {
+    "name": "Nightal",
+    "holiday": "",
+    "event": "Nightal 20: Winter Equinox",
+    "leap": false
+  }
+}
