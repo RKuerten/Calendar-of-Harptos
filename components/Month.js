@@ -31,7 +31,13 @@ export default class Month extends React.Component {
         <View style={[styles.monthRow, monthBorder[2]]}>
           {Array.from(Array(10), (e, i) => i + 11).map(
             (day, key, { length }) => (
-              <View style={styles.dayBox(length - 1 === key)} key={key}>
+              <View
+                style={[
+                  styles.dayBox(length - 1 === key),
+                  day === month.eventDay && styles.dayBackground,
+                ]}
+                key={key}
+              >
                 <Text style={styles.dayText}>{day}</Text>
               </View>
             )
@@ -40,7 +46,13 @@ export default class Month extends React.Component {
         <View style={[styles.monthRow, monthBorder[3]]}>
           {Array.from(Array(10), (e, i) => i + 21).map(
             (day, key, { length }) => (
-              <View style={styles.dayBox(length - 1 === key)} key={key}>
+              <View
+                style={[
+                  styles.dayBox(length - 1 === key),
+                  day === month.eventDay && styles.dayBackground,
+                ]}
+                key={key}
+              >
                 <Text style={styles.dayText}>{day}</Text>
               </View>
             )
@@ -96,6 +108,9 @@ const styles = StyleSheet.create({
     borderRightWidth: last ? 0 : 1,
     padding: Theme.relativeWidth(2),
   }),
+  dayBackground: {
+    backgroundColor: Colors.dayBorder,
+  },
   dayText: {
     color: Colors.black,
     fontSize: Theme.responsiveFontSize(16),
