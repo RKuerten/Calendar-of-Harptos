@@ -108,9 +108,25 @@ class CalendarClass extends React.Component {
     }
   };
 
+  _isLeapYear = () => {
+    let { fyear, useFYear, year } = this.state;
+    let currentYear = 0;
+    if (useFYear) {
+      currentYear = fyear.year;
+    } else {
+      currentYear = parseInt(years[year].year);
+    }
+    if (Math.sqrt(Math.pow(currentYear % 4, 2)) !== 0) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   render() {
     let { navigation } = this.props;
     let { month } = this.state;
+    const isLeapYear = this._isLeapYear();
     const yearValue = this._getYearLabel();
     const yearName = this._getYearName();
 
@@ -129,7 +145,7 @@ class CalendarClass extends React.Component {
               onPressRight={() => this._handleMonthUp()}
               title={months[month].name}
             />
-            <Month month={months[month]} />
+            <Month month={months[month]} isLeapYear={isLeapYear} />
           </View>
         </Content>
       </Container>

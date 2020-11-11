@@ -15,7 +15,7 @@ export default class Month extends React.Component {
   };
 
   render() {
-    let { month } = this.props;
+    let { isLeapYear, month } = this.props;
 
     return (
       <View>
@@ -63,7 +63,7 @@ export default class Month extends React.Component {
             <Text style={styles.holidayText}>{month.holiday}</Text>
           </View>
         )}
-        {month.leap && (
+        {month.leap && isLeapYear && (
           <View style={styles.holidayRow}>
             <Text style={styles.holidayText}>
               Shieldmeet (Once Every Four Years)
