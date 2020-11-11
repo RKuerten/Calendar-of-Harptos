@@ -127,7 +127,7 @@ class CalendarClass extends React.Component {
     let { navigation } = this.props;
     let { month } = this.state;
     const isLeapYear = this._isLeapYear();
-    const yearValue = this._getYearLabel();
+    const yearLabel = this._getYearLabel();
     const yearName = this._getYearName();
 
     return (
@@ -136,9 +136,9 @@ class CalendarClass extends React.Component {
         <Content>
           <View style={styles.container}>
             <CalendarSwitch
-              title={yearValue}
               onPressLeft={() => this._handleYearDown()}
               onPressRight={() => this._handleYearUp()}
+              title={yearLabel}
             />
             <CalendarSwitch
               onPressLeft={() => this._handleMonthDown()}
