@@ -1,13 +1,13 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useRoute } from "@react-navigation/native";
 import { Container } from "native-base";
 
 import { months } from "../data/Months";
 import { years } from "../data/Years";
 import { CalendarSwitch, Content, Header, Month } from "../components";
 
-const yearsMax = years.length;
+const yearsMax = years.length; //2296
 
 class CalendarClass extends React.Component {
   constructor(props) {
@@ -15,10 +15,19 @@ class CalendarClass extends React.Component {
     this.state = {
       fyear: { year: "", name: "" },
       month: 0,
-      year: 2296,
+      year: props.useSearchYear ? props.route.params.year : 2188, //1492 DR
       useFYear: false,
     };
   }
+
+  _getYearLabel = () => {
+    let { fyear, useFYear, year } = this.state;
+    if (useFYear) {
+      return fyear.name;
+    } else {
+      return `${years[year].year} DR`;
+    }
+  };
 
   _getYearName = () => {
     let { fyear, useFYear, year } = this.state;
@@ -26,15 +35,6 @@ class CalendarClass extends React.Component {
       return fyear.name;
     } else {
       return years[year].name;
-    }
-  };
-
-  _getYearValue = () => {
-    let { fyear, useFYear, year } = this.state;
-    if (useFYear) {
-      return fyear.name;
-    } else {
-      return `${years[year].year} DR`;
     }
   };
 
@@ -110,8 +110,8 @@ class CalendarClass extends React.Component {
 
   render() {
     let { navigation } = this.props;
-    let { month, year } = this.state;
-    const yearValue = this._getYearValue();
+    let { month } = this.state;
+    const yearValue = this._getYearLabel();
     const yearName = this._getYearName();
 
     return (
@@ -139,7 +139,16 @@ class CalendarClass extends React.Component {
 
 export default function CalendarScreen(props) {
   const isFocused = useIsFocused();
-  return <CalendarClass {...props} isFocused={isFocused} />;
+  const route = useRoute();
+  const useSearchYear = route.params != null;
+
+  return (
+    <CalendarClass
+      {...props}
+      isFocused={isFocused}
+      useSearchYear={useSearchYear}
+    />
+  );
 }
 
 const styles = StyleSheet.create({
