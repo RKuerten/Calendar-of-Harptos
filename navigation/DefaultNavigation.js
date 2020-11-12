@@ -5,14 +5,19 @@ import { Icon } from "native-base";
 
 import Colors from "../constants/Colors";
 import CalendarScreen from "../screens/CalendarScreen";
-import CreditsScreen from "../screens/CreditsScreen";
+import LunarCalendarScreen from "../screens/LunarCalendarScreen";
 import SearchScreen from "../screens/SearchScreen";
+import CreditsScreen from "../screens/CreditsScreen";
 
 const Tab = createBottomTabNavigator();
 
 const icons = {
   Calendar: {
     name: "calendar",
+    type: "MaterialCommunityIcons",
+  },
+  LunarCalendar: {
+    name: "moon-waning-crescent",
     type: "MaterialCommunityIcons",
   },
   Search: {
@@ -56,6 +61,11 @@ const DefaultNavigation = () => {
         name="Calendar"
         options={{ title: "" }}
         component={CalendarScreen}
+      />
+      <Tab.Screen
+        name="LunarCalendar"
+        options={{ title: "" }}
+        component={LunarCalendarScreen}
       />
       <Tab.Screen
         name="Search"
