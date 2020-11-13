@@ -37,10 +37,7 @@ export default function App(props) {
       <NavigationContainer>
         <Root>
           <PaperProvider theme={theme}>
-            <View style={styles.container}>
-              {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-              <AppNavigator />
-            </View>
+            <AppNavigator />
           </PaperProvider>
         </Root>
       </NavigationContainer>
