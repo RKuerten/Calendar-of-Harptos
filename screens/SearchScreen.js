@@ -1,42 +1,100 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Container } from "native-base";
+import { FlatList, StyleSheet, View } from "react-native";
+import { FAB, Searchbar } from "react-native-paper";
 
-import { Content, Header } from "../components";
+import { years } from "../data/Years";
+import { ListItem } from "../components";
 import Colors from "../constants/Colors";
-import Theme from "../utils/Theme";
 
 export default class SearchScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [...years.slice(0, 50)],
+      loaded: 50,
+      text: "",
+    };
+    this.flatRef = null;
+  }
+
+  _handleLoading = () => {
+    let { data, loaded, text } = this.state;
+    if (text.length === 0) {
+      if (loaded <= 2297) {
+        this.setState({
+          data: [...data, ...years.slice(loaded, loaded + 50)],
+          loaded: loaded + 50,
+        });
+      }
+    }
+  };
+
+  _handleSearch = (text) => {
+    this.setState({ text });
+  };
+
   render() {
+    let { data, text } = this.state;
     let { navigation } = this.props;
 
     return (
-      <Container>
-        <Header navigation={navigation} title="Search By Year" />
-        <Content>
-          <View style={styles.container}>
-            <Text style={styles.text}>
-              Forgotten Realms is a trademark of Wizards of the Coast, Inc., a
-              subsidiary of Hasbro, Inc. All Rights Reserved.
-              {"\n\n"}
-              Source code is © 2020 by Rodrigo Kuerten.
-            </Text>
-          </View>
-        </Content>
-      </Container>
+      <View style={styles.container}>
+        <Searchbar
+          placeholder="Search Year By Name"
+          onChangeText={(text) => this._handleSearch(text)}
+          style={styles.searchBar}
+          value={text}
+        />
+        <FlatList
+          ref={(ref) => (this.flatRef = ref)}
+          data={data}
+          keyExtractor={(item, index) => index.toString()}
+          initialNumToRender={20}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          onEndReached={this._handleLoading}
+          onEndReachedThreshold={20}
+          renderItem={({ item }) => (
+            <ListItem
+              item={item}
+              onPress={() => {
+                console.log(item);
+              }}
+            />
+          )}
+          showsVerticalScrollIndicator={false}
+        />
+        <FAB
+          style={styles.fab}
+          icon="arrow-up"
+          onPress={() =>
+            this.flatRef.scrollToOffset({ animated: true, offset: 0 })
+          }
+        />
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
     flex: 1,
-    padding: 20,
+    backgroundColor: Colors.white,
+    width: "100%",
   },
-  text: {
-    color: Colors.black,
-    fontFamily: "Roboto_medium",
-    fontSize: Theme.responsiveFontSize(15),
+  searchBar: {
+    borderBottomWidth: 1,
+    borderColor: Colors.dayBorder,
+    height: 65,
+    elevation: 0,
+    shadowOpacity: 0,
+  },
+  separator: {
+    borderTopWidth: 1,
+    borderColor: Colors.dayBorder,
+  },
+  fab: {
+    position: "absolute",
+    right: 16,
+    bottom: 16,
   },
 });
