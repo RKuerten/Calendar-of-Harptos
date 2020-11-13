@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 import { FAB, Searchbar } from "react-native-paper";
 
 import { years } from "../data/Years";
@@ -33,6 +33,19 @@ export default class SearchScreen extends React.Component {
     this.setState({ text });
   };
 
+  _renderFooter = () => {
+    let { data, loaded } = this.state;
+    if (loaded <= 2297 || loaded < data.length) {
+      return (
+        <View style={styles.loading}>
+          <ActivityIndicator color={Colors.dayBorder} size="large" />
+        </View>
+      );
+    } else {
+      return <></>;
+    }
+  };
+
   render() {
     let { data, text } = this.state;
     let { navigation } = this.props;
@@ -51,8 +64,9 @@ export default class SearchScreen extends React.Component {
           keyExtractor={(item, index) => index.toString()}
           initialNumToRender={20}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
+          ListFooterComponent={this._renderFooter}
           onEndReached={this._handleLoading}
-          onEndReachedThreshold={20}
+          onEndReachedThreshold={25}
           renderItem={({ item }) => (
             <ListItem
               item={item}
@@ -96,5 +110,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 16,
     bottom: 16,
+  },
+  loading: {
+    paddingVertical: 20,
+    borderTopWidth: 1,
+    borderColor: Colors.dayBorder,
   },
 });
