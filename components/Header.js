@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Icon } from "native-base";
+import { MaterialIcons } from "@expo/vector-icons";
 
 import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
@@ -24,11 +24,7 @@ export default class Header extends React.Component {
               style={styles.headerButton}
               onPress={() => navigation.goBack()}
             >
-              <Icon
-                style={styles.headerIcon}
-                type="MaterialIcons"
-                name="arrow-back"
-              />
+              <MaterialIcons style={styles.headerIcon} name="arrow-back" />
             </TouchableOpacity>
           )}
           <Text style={styles.titleStyle}>{title}</Text>
