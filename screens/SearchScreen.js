@@ -1,9 +1,9 @@
 import React from "react";
 import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
-import { FAB, Searchbar } from "react-native-paper";
+import { FAB } from "react-native-paper";
 
 import { years } from "../data/Years";
-import { ListItem } from "../components";
+import { ListItem, Searchbar } from "../components";
 import Colors from "../constants/Colors";
 
 export default class SearchScreen extends React.Component {
@@ -17,6 +17,11 @@ export default class SearchScreen extends React.Component {
     this.flatRef = null;
   }
 
+  _handleClearText = () => {
+    this.setState({ data: [...years.slice(0, 50)], text: "" });
+    this.flatRef.scrollToOffset({ animated: true, offset: 0 });
+  };
+
   _handleLoading = () => {
     let { data, loaded, text } = this.state;
     if (text.length === 0) {
@@ -29,33 +34,55 @@ export default class SearchScreen extends React.Component {
     }
   };
 
+  _handleOnItemPress = (index) => {
+    let { navigation } = this.props;
+    console.log(index);
+    navigation.navigate("Calendar", { year: index });
+  };
+
   _handleSearch = (text) => {
     this.setState({ text });
+    let newData = years.filter((year) => {
+      if (
+        year.name.toLowerCase().includes(text.toLowerCase()) ||
+        year.year === text.trim()
+      ) {
+        return year;
+      }
+    });
+    this.setState({ data: newData, loaded: 50 });
+  };
+
+  _handleScrollToTop = () => {
+    let { text } = this.state;
+    if (text.length === 0) {
+      this.flatRef.scrollToOffset({ animated: true, offset: 0 });
+      this.setState({ data: [...years.slice(0, 50)], loaded: 50 });
+    } else {
+      this.flatRef.scrollToOffset({ animated: true, offset: 0 });
+    }
   };
 
   _renderFooter = () => {
-    let { data, loaded } = this.state;
-    if (loaded <= 2297 || loaded < data.length) {
+    let { text, loaded } = this.state;
+    if (loaded <= 2297 && text.trim().length === 0) {
       return (
         <View style={styles.loading}>
           <ActivityIndicator color={Colors.dayBorder} size="large" />
         </View>
       );
     } else {
-      return <></>;
+      return <View style={styles.separator} />;
     }
   };
 
   render() {
     let { data, text } = this.state;
-    let { navigation } = this.props;
-
     return (
       <View style={styles.container}>
         <Searchbar
-          placeholder="Search Year By Name"
           onChangeText={(text) => this._handleSearch(text)}
-          style={styles.searchBar}
+          onClearText={() => this._handleClearText()}
           value={text}
         />
         <FlatList
@@ -67,12 +94,10 @@ export default class SearchScreen extends React.Component {
           ListFooterComponent={this._renderFooter}
           onEndReached={this._handleLoading}
           onEndReachedThreshold={25}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <ListItem
               item={item}
-              onPress={() => {
-                console.log(item);
-              }}
+              onPress={() => this._handleOnItemPress(index)}
             />
           )}
           showsVerticalScrollIndicator={false}
@@ -80,9 +105,7 @@ export default class SearchScreen extends React.Component {
         <FAB
           style={styles.fab}
           icon="arrow-up"
-          onPress={() =>
-            this.flatRef.scrollToOffset({ animated: true, offset: 0 })
-          }
+          onPress={() => this._handleScrollToTop()}
         />
       </View>
     );
@@ -108,8 +131,8 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: "absolute",
-    right: 16,
-    bottom: 16,
+    right: 20,
+    bottom: 20,
   },
   loading: {
     paddingVertical: 20,
