@@ -15,9 +15,35 @@ class CalendarClass extends React.Component {
     this.state = {
       fyear: { year: "", name: "" },
       month: 0,
-      year: props.useSearchYear ? props.route.params.year : 2188, //1492 DR
+      year: 2188, //1492 DR
       useFYear: false,
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.route.params == null && this.props.route.params != null) {
+      this.setState({ year: this.props.route.params.year });
+    } else if (
+      prevProps.route.params != null &&
+      this.props.route.params != null
+    ) {
+      if (prevProps.route.params.year !== this.props.route.params.year) {
+        this.setState({ year: this.props.route.params.year });
+      }
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.route.params != null) {
+      return true;
+    } else if (
+      nextState.year !== this.state.year ||
+      nextState.month !== this.state.month
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   _getYearLabel = () => {
@@ -155,16 +181,8 @@ class CalendarClass extends React.Component {
 
 export default function CalendarScreen(props) {
   const isFocused = useIsFocused();
-  const route = useRoute();
-  const useSearchYear = route.params != null;
 
-  return (
-    <CalendarClass
-      {...props}
-      isFocused={isFocused}
-      useSearchYear={useSearchYear}
-    />
-  );
+  return <CalendarClass {...props} isFocused={isFocused} />;
 }
 
 const styles = StyleSheet.create({
