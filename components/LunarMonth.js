@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Icon } from "native-base";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
@@ -20,37 +20,13 @@ export default class LunarMonth extends React.Component {
     let type = phases.moon[phases.days.findIndex((dayS) => dayS === day)];
 
     if (type === "fm") {
-      return (
-        <Icon
-          style={styles.icon}
-          type="MaterialCommunityIcons"
-          name="moon-full"
-        />
-      );
+      return <MaterialCommunityIcons style={styles.icon} name="moon-full" />;
     } else if (type === "nm") {
-      return (
-        <Icon
-          style={styles.icon}
-          type="MaterialCommunityIcons"
-          name="moon-new"
-        />
-      );
+      return <MaterialCommunityIcons style={styles.icon} name="moon-new" />;
     } else if (type === "fq") {
-      return (
-        <Icon
-          style={styles.icon}
-          type="MaterialCommunityIcons"
-          name="moon-first-quarter"
-        />
-      );
+      return <MaterialCommunityIcons style={styles.icon} name="moon-first-quarter" />;
     } else if (type === "lq") {
-      return (
-        <Icon
-          style={styles.icon}
-          type="MaterialCommunityIcons"
-          name="moon-last-quarter"
-        />
-      );
+      return <MaterialCommunityIcons style={styles.icon} name="moon-last-quarter" />;
     }
   };
 
