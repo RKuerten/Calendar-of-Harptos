@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     marginVertical: 2,
   },
   itemDesc: {
-    color: "#666",
+    color: Colors.darkGray,
     fontSize: Theme.responsiveFontSize(14),
   },
 });
