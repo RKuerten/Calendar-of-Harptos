@@ -1,6 +1,5 @@
 import CalendarSwitch from "./CalendarSwitch";
 import Content from "./Content";
-import Drawer from "./Drawer";
 import Header from "./Header";
 import ListItem from "./ListItem";
 import Loading from "./Loading";
@@ -11,7 +10,6 @@ import Searchbar from "./Searchbar";
 export {
   CalendarSwitch,
   Content,
-  Drawer,
   Header,
   ListItem,
   Loading,
