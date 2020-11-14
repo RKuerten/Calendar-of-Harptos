@@ -110,6 +110,7 @@ export default class SearchScreen extends React.Component {
             />
           )}
           showsVerticalScrollIndicator={false}
+          windowSize={41}
         />
         <FAB
           style={styles.fab}
