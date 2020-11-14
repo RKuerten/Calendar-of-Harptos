@@ -1,11 +1,14 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import { useIsFocused, useRoute } from "@react-navigation/native";
-import { Container } from "native-base";
+import { StyleSheet, Text, View } from "react-native";
+import { Switch } from "react-native-paper";
+import { useIsFocused } from "@react-navigation/native";
 
 import { months } from "../data/Months";
+import { phases } from "../data/MoonPhases";
 import { years } from "../data/Years";
-import { CalendarSwitch, Content, Header, Month } from "../components";
+import { CalendarSwitch, Header, LunarMonth, Month } from "../components";
+import Colors from "../constants/Colors";
+import Theme from "../utils/Theme";
 
 const yearsMax = years.length; //2296
 
@@ -14,6 +17,7 @@ class CalendarClass extends React.Component {
     super(props);
     this.state = {
       fyear: { year: "", name: "" },
+      lunar: false,
       month: 0,
       year: 2188, //1492 DR
       useFYear: false,
@@ -38,7 +42,8 @@ class CalendarClass extends React.Component {
       return true;
     } else if (
       nextState.year !== this.state.year ||
-      nextState.month !== this.state.month
+      nextState.month !== this.state.month ||
+      nextState.lunar !== this.state.lunar
     ) {
       return true;
     } else {
@@ -142,25 +147,21 @@ class CalendarClass extends React.Component {
     } else {
       currentYear = parseInt(years[year].year);
     }
-    if (Math.sqrt(Math.pow(currentYear % 4, 2)) !== 0) {
-      return false;
-    } else {
-      return true;
-    }
+    return Math.sqrt(Math.pow(currentYear % 4, 2));
   };
 
   render() {
     let { navigation } = this.props;
-    let { month } = this.state;
+    let { lunar, month } = this.state;
     const isLeapYear = this._isLeapYear();
     const yearLabel = this._getYearLabel();
     const yearName = this._getYearName();
 
     return (
-      <Container>
+      <View style={styles.container}>
         <Header navigation={navigation} title={yearName} />
-        <Content>
-          <View style={styles.container}>
+        <View style={styles.innerContainer}>
+          <View style={styles.topView}>
             <CalendarSwitch
               onPressLeft={() => this._handleYearDown()}
               onPressRight={() => this._handleYearUp()}
@@ -171,10 +172,26 @@ class CalendarClass extends React.Component {
               onPressRight={() => this._handleMonthUp()}
               title={months[month].name}
             />
-            <Month month={months[month]} isLeapYear={isLeapYear} />
+            {lunar ? (
+              <LunarMonth
+                isLeapYear={isLeapYear}
+                month={months[month]}
+                phases={phases[isLeapYear][month]}
+              />
+            ) : (
+              <Month month={months[month]} isLeapYear={isLeapYear} />
+            )}
           </View>
-        </Content>
-      </Container>
+          <View style={styles.bottomView}>
+            <Switch
+              color={Colors.darkGray}
+              onValueChange={() => this.setState({ lunar: !lunar })}
+              value={lunar}
+            />
+            <Text style={styles.switchText}>Toggle lunar phases</Text>
+          </View>
+        </View>
+      </View>
     );
   }
 }
@@ -187,9 +204,30 @@ export default function CalendarScreen(props) {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: Colors.white,
     flex: 1,
-    alignItems: "center",
+  },
+  innerContainer: {
+    flex: 1,
+    justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingVertical: 10,
+  },
+  topView: {
+    alignItems: "center",
+  },
+  bottomView: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 10,
+  },
+  switchText: {
+    color: Colors.black,
+    fontFamily: "Roboto_medium",
+    fontSize: Theme.responsiveFontSize(16),
+    marginLeft: 5,
+    marginBottom: 3,
   },
 });
