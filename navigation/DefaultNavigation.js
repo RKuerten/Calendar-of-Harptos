@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Icon } from "native-base";
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Colors from "../constants/Colors";
 import CalendarScreen from "../screens/CalendarScreen";
@@ -36,13 +36,21 @@ const DefaultNavigation = () => {
       initialRouteName="Calendar"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => {
-          return (
-            <Icon
-              style={[styles.icon, focused && styles.iconActive]}
-              type={icons[route.name].type}
-              name={icons[route.name].name}
-            />
-          );
+          if (icons[route.name].type === "MaterialCommunityIcons") {
+            return (
+              <MaterialCommunityIcons
+                style={[styles.icon, focused && styles.iconActive]}
+                name={icons[route.name].name}
+              />
+            );
+          } else {
+            return (
+              <MaterialIcons
+                style={[styles.icon, focused && styles.iconActive]}
+                name={icons[route.name].name}
+              />
+            );
+          }
         },
       })}
       tabBarOptions={{
