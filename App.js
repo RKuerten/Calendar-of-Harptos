@@ -2,10 +2,9 @@ import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import React, { useState } from "react";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import { Ionicons } from "@expo/vector-icons";
 import { Root } from "native-base";
 
 import { AppNavigator } from "./navigation/AppNavigator";
@@ -53,7 +52,6 @@ async function loadResourcesAsync() {
       require("./assets/images/icon-mini.png"),
     ]),
     Font.loadAsync({
-      ...Ionicons.font,
       Roboto: require("native-base/Fonts/Roboto.ttf"),
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
     }),
