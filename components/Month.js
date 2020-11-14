@@ -63,7 +63,7 @@ export default class Month extends React.Component {
             <Text style={styles.holidayText}>{month.holiday}</Text>
           </View>
         )}
-        {month.leap && isLeapYear && (
+        {month.leap && isLeapYear === 0 && (
           <View style={styles.holidayRow}>
             <Text style={styles.holidayText}>
               Shieldmeet (Once Every Four Years)
