@@ -5,6 +5,7 @@ import { FAB } from "react-native-paper";
 import { years } from "../data/Years";
 import { ListItem, Searchbar } from "../components";
 import Colors from "../constants/Colors";
+import Theme from "../utils/Theme";
 
 export default class SearchScreen extends React.Component {
   constructor(props) {
@@ -36,7 +37,6 @@ export default class SearchScreen extends React.Component {
 
   _handleOnItemPress = (index) => {
     let { navigation } = this.props;
-    console.log(index);
     navigation.navigate("Calendar", { year: index });
   };
 
@@ -78,6 +78,9 @@ export default class SearchScreen extends React.Component {
 
   render() {
     let { data, text } = this.state;
+    const HEIGHT =
+      Theme.responsiveFontSize(16) + Theme.responsiveFontSize(15) + 25;
+
     return (
       <View style={styles.container}>
         <Searchbar
@@ -88,6 +91,11 @@ export default class SearchScreen extends React.Component {
         <FlatList
           ref={(ref) => (this.flatRef = ref)}
           data={data}
+          getItemLayout={(data, index) => ({
+            length: HEIGHT,
+            offset: HEIGHT * index,
+            index,
+          })}
           keyExtractor={(item, index) => index.toString()}
           initialNumToRender={20}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
@@ -98,6 +106,7 @@ export default class SearchScreen extends React.Component {
             <ListItem
               item={item}
               onPress={() => this._handleOnItemPress(index)}
+              shouldUpdate={text.length > 0}
             />
           )}
           showsVerticalScrollIndicator={false}
