@@ -12,6 +12,11 @@ import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
 
 export default class Header extends React.Component {
+  static defaultProps = {
+    hasShadow: true,
+    title: "Carregando...",
+  };
+
   render() {
     let { hasShadow, navigation, title } = this.props;
     let index = navigation.canGoBack();
@@ -33,11 +38,6 @@ export default class Header extends React.Component {
     );
   }
 }
-
-Header.defaultProps = {
-  hasShadow: true,
-  title: "Carregando...",
-};
 
 const styles = StyleSheet.create({
   header: {
