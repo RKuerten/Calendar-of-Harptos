@@ -17,7 +17,7 @@ const icons = {
     type: "MaterialCommunityIcons",
   },
   LunarCalendar: {
-    name: "moon-waning-crescent",
+    name: "information-outline",
     type: "MaterialCommunityIcons",
   },
   Search: {
@@ -54,15 +54,15 @@ const DefaultNavigation = () => {
         },
       })}
       tabBarOptions={{
+        activeTintColor: "#fff",
+        inactiveTintColor: Colors.tabIconDefault,
+        keyboardHidesTabBar: true,
         style: {
           alignItems: "center",
           backgroundColor: Colors.tintColor,
           height: 60,
           justifyContent: "space-between",
         },
-        activeTintColor: "#fff",
-        inactiveTintColor: Colors.tabIconDefault,
-        keyboardHidesTabBar: true,
       }}
     >
       <Tab.Screen
@@ -71,14 +71,14 @@ const DefaultNavigation = () => {
         component={CalendarScreen}
       />
       <Tab.Screen
-        name="LunarCalendar"
-        options={{ title: "" }}
-        component={LunarCalendarScreen}
-      />
-      <Tab.Screen
         name="Search"
         options={{ title: "" }}
         component={SearchScreen}
+      />
+      <Tab.Screen
+        name="LunarCalendar"
+        options={{ title: "" }}
+        component={LunarCalendarScreen}
       />
       <Tab.Screen
         name="Credits"
