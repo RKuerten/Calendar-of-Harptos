@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Switch } from "react-native-paper";
-import { useIsFocused } from "@react-navigation/native";
 
 import { months } from "../data/Months";
 import { phases } from "../data/MoonPhases";
@@ -18,7 +17,7 @@ import Theme from "../utils/Theme";
 
 const yearsMax = years.length; //2296
 
-class CalendarClass extends React.Component {
+export default class CalendarScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -246,12 +245,6 @@ class CalendarClass extends React.Component {
       </View>
     );
   }
-}
-
-export default function CalendarScreen(props) {
-  const isFocused = useIsFocused();
-
-  return <CalendarClass {...props} isFocused={isFocused} />;
 }
 
 const styles = StyleSheet.create({
