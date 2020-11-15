@@ -4,6 +4,7 @@ import InputDialog from "./InputDialog";
 import ListItem from "./ListItem";
 import LunarMonth from "./LunarMonth";
 import Month from "./Month";
+import MonthsDialog from "./MonthsDialog";
 import Searchbar from "./Searchbar";
 
 export {
@@ -13,5 +14,6 @@ export {
   ListItem,
   LunarMonth,
   Month,
+  MonthsDialog,
   Searchbar,
 };
