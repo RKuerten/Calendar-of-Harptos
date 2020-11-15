@@ -21,7 +21,6 @@ export default class ListItem extends React.Component {
 
     return (
       <TouchableOpacity
-        delayPressIn={10}
         style={styles.itemWrapper}
         onPress={onPress}
       >
