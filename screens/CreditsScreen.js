@@ -13,7 +13,7 @@ export default class CreditsScreen extends React.Component {
       <View style={styles.container}>
         <Header navigation={navigation} title="Credits" />
         <View style={styles.innerContainer}>
-          <Text style={styles.text}>
+          <Text selectable style={styles.text}>
             Forgotten Realms is a trademark of Wizards of the Coast, Inc., a
             subsidiary of Hasbro, Inc. All Rights Reserved.
             {"\n\n"}
