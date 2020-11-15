@@ -14,7 +14,7 @@ const Searchbar = ({
     <MaterialIcons name="search" style={styles.iconsStyle} />
     <TextInput
       onChangeText={onChangeText}
-      placeholder="Search Year by Name"
+      placeholder="Search Year by Name or Value"
       placeholderTextColor={Colors.darkGray}
       style={styles.inputText}
       value={value}
