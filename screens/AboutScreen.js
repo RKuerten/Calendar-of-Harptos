@@ -5,13 +5,13 @@ import { Header } from "../components";
 import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
 
-export default class LunarCalendarScreen extends React.Component {
+export default class AboutScreen extends React.Component {
   render() {
     let { navigation } = this.props;
 
     return (
       <View style={styles.container}>
-        <Header navigation={navigation} title="LunarCalendar" />
+        <Header navigation={navigation} title="About this App" />
         <View style={styles.innerContainer}>
           <Text style={styles.text}>
             Forgotten Realms is a trademark of Wizards of the Coast, Inc., a

@@ -5,7 +5,7 @@ import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Colors from "../constants/Colors";
 import CalendarScreen from "../screens/CalendarScreen";
-import LunarCalendarScreen from "../screens/LunarCalendarScreen";
+import AboutScreen from "../screens/AboutScreen";
 import SearchScreen from "../screens/SearchScreen";
 import CreditsScreen from "../screens/CreditsScreen";
 
@@ -16,13 +16,13 @@ const icons = {
     name: "calendar",
     type: "MaterialCommunityIcons",
   },
-  LunarCalendar: {
-    name: "information-outline",
-    type: "MaterialCommunityIcons",
-  },
   Search: {
     name: "search",
     type: "MaterialIcons",
+  },
+  About: {
+    name: "information-outline",
+    type: "MaterialCommunityIcons",
   },
   Credits: {
     name: "copyright",
@@ -76,9 +76,9 @@ const DefaultNavigation = () => {
         component={SearchScreen}
       />
       <Tab.Screen
-        name="LunarCalendar"
+        name="About"
         options={{ title: "" }}
-        component={LunarCalendarScreen}
+        component={AboutScreen}
       />
       <Tab.Screen
         name="Credits"
