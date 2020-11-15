@@ -6,7 +6,13 @@ import { useIsFocused } from "@react-navigation/native";
 import { months } from "../data/Months";
 import { phases } from "../data/MoonPhases";
 import { years } from "../data/Years";
-import { CalendarSwitch, Header, LunarMonth, Month } from "../components";
+import {
+  CalendarSwitch,
+  Header,
+  InputDialog,
+  LunarMonth,
+  Month,
+} from "../components";
 import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
 
@@ -20,6 +26,8 @@ class CalendarClass extends React.Component {
       lunar: false,
       month: 0,
       year: 2188, //1492 DR
+      yearDialog: "",
+      dialogVisible: false,
       useFYear: false,
     };
   }
@@ -43,7 +51,11 @@ class CalendarClass extends React.Component {
     } else if (
       nextState.year !== this.state.year ||
       nextState.month !== this.state.month ||
-      nextState.lunar !== this.state.lunar
+      nextState.lunar !== this.state.lunar ||
+      nextState.dialogVisible !== this.state.dialogVisible ||
+      nextState.yearDialog !== this.state.yearDialog ||
+      nextState.useFYear !== this.state.useFYear ||
+      nextState.fyear.year !== this.state.fyear.year
     ) {
       return true;
     } else {
@@ -84,6 +96,27 @@ class CalendarClass extends React.Component {
       this.setState({ month: 0 }, () => this._handleYearUp());
     } else {
       this.setState({ month: month + 1 });
+    }
+  };
+
+  _handleYearDialog = () => {
+    let { yearDialog } = this.state;
+    let intYear = parseInt(yearDialog);
+
+    if (isNaN(intYear)) {
+      console.warn("Is NaN");
+    } else if (intYear > 1600 || intYear < -700) {
+      this.setState({
+        fyear: {
+          year: intYear,
+          name: `${intYear} DR`,
+        },
+        yearDialog: "",
+        useFYear: true,
+      });
+    } else {
+      let index = years.findIndex((yearz) => yearz.year === yearDialog);
+      this.setState({ year: index, useFYear: false, yearDialog: "" });
     }
   };
 
@@ -152,7 +185,7 @@ class CalendarClass extends React.Component {
 
   render() {
     let { navigation } = this.props;
-    let { lunar, month } = this.state;
+    let { lunar, month, dialogVisible, yearDialog } = this.state;
     const isLeapYear = this._isLeapYear();
     const yearLabel = this._getYearLabel();
     const yearName = this._getYearName();
@@ -160,11 +193,30 @@ class CalendarClass extends React.Component {
     return (
       <View style={styles.container}>
         <Header navigation={navigation} title={yearName} />
+        <InputDialog
+          inputValue={yearDialog}
+          onChangeText={(text) => {
+            this.setState({
+              yearDialog: text.replace(/[^0-9-]/g, ""),
+            });
+          }}
+          onComplete={() => {
+            this.setState({ dialogVisible: false });
+            this._handleYearDialog();
+          }}
+          onDismiss={() =>
+            this.setState({ dialogVisible: false, yearDialog: "" })
+          }
+          visible={dialogVisible}
+        />
         <View style={styles.innerContainer}>
           <View style={styles.topView}>
             <CalendarSwitch
               onPressLeft={() => this._handleYearDown()}
               onPressRight={() => this._handleYearUp()}
+              onPressText={() =>
+                this.setState({ dialogVisible: !dialogVisible })
+              }
               title={yearLabel}
             />
             <CalendarSwitch
@@ -206,6 +258,12 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white,
     flex: 1,
+  },
+  inputStyle: {
+    backgroundColor: Colors.white,
+    color: Colors.black,
+    fontFamily: "Roboto_medium",
+    fontSize: 17,
   },
   innerContainer: {
     flex: 1,
