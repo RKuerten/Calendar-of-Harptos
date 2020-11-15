@@ -10,18 +10,25 @@ export default class CalendarSwitch extends React.Component {
   static defaultProps = {
     onPressLeft: () => {},
     onPressRight: () => {},
+    onPressText: null,
     title: "",
   };
 
   render() {
-    let { onPressLeft, onPressRight, title } = this.props;
+    let { onPressText, onPressLeft, onPressRight, title } = this.props;
 
     return (
       <View style={styles.baseSwitch}>
         <TouchableOpacity style={styles.switchButton} onPress={onPressLeft}>
           <MaterialIcons style={styles.switchIcon} name="chevron-left" />
         </TouchableOpacity>
-        <Text style={styles.switchText}>{title}</Text>
+        {onPressText != null ? (
+          <TouchableOpacity onPress={onPressText}>
+            <Text style={styles.switchText}>{title}</Text>
+          </TouchableOpacity>
+        ) : (
+          <Text style={styles.switchText}>{title}</Text>
+        )}
         <TouchableOpacity style={styles.switchButton} onPress={onPressRight}>
           <MaterialIcons style={styles.switchIcon} name="chevron-right" />
         </TouchableOpacity>
