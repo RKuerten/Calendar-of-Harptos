@@ -24,11 +24,7 @@ export default class InputDialog extends React.Component {
 
     return (
       <Portal>
-        <Dialog
-          onDismiss={onDismiss}
-          style={styles.dialogWrapper}
-          visible={visible}
-        >
+        <Dialog onDismiss={onDismiss} visible={visible}>
           <Dialog.Title>Insert a Year</Dialog.Title>
           <Dialog.Content>
             <TextInput
