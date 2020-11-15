@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
   text: {
     color: Colors.black,
     fontFamily: "Roboto_medium",
-    fontSize: Theme.responsiveFontSize(15),
+    fontSize: Theme.responsiveFontSize(16),
   },
 });
