@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import { Root } from "native-base";
+import { Roboto_400Regular, Roboto_500Medium } from "@expo-google-fonts/roboto";
 
 import { AppNavigator } from "./navigation/AppNavigator";
 import Colors from "./constants/Colors";
@@ -34,11 +34,9 @@ export default function App(props) {
   } else {
     return (
       <NavigationContainer>
-        <Root>
-          <PaperProvider theme={theme}>
-            <AppNavigator />
-          </PaperProvider>
-        </Root>
+        <PaperProvider theme={theme}>
+          <AppNavigator />
+        </PaperProvider>
       </NavigationContainer>
     );
   }
@@ -52,8 +50,8 @@ async function loadResourcesAsync() {
       require("./assets/images/icon-mini.png"),
     ]),
     Font.loadAsync({
-      Roboto: require("native-base/Fonts/Roboto.ttf"),
-      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+      Roboto: Roboto_400Regular,
+      Roboto_medium: Roboto_500Medium,
     }),
   ]);
 }
