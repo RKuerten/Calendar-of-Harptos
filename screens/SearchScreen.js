@@ -11,6 +11,7 @@ export default class SearchScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      changed: false,
       data: [...years.slice(0, 50)],
       loaded: 50,
       text: "",
@@ -19,7 +20,7 @@ export default class SearchScreen extends React.Component {
   }
 
   _handleClearText = () => {
-    this.setState({ data: [...years.slice(0, 50)], text: "" });
+    this.setState({ changed: true, data: [...years.slice(0, 50)], text: "" });
     this.flatRef.scrollToOffset({ animated: true, offset: 0 });
   };
 
@@ -63,7 +64,7 @@ export default class SearchScreen extends React.Component {
     let { text } = this.state;
     if (text.length === 0) {
       this.flatRef.scrollToOffset({ animated: true, offset: 0 });
-      this.setState({ data: [...years.slice(0, 50)], loaded: 50 });
+      this.setState({ changed: false, data: [...years.slice(0, 50)], loaded: 50 });
     } else {
       this.flatRef.scrollToOffset({ animated: true, offset: 0 });
     }
@@ -83,7 +84,7 @@ export default class SearchScreen extends React.Component {
   };
 
   render() {
-    let { data, text } = this.state;
+    let { changed, data, text } = this.state;
     const HEIGHT =
       Theme.responsiveFontSize(16) + Theme.responsiveFontSize(15) + 25;
 
@@ -112,7 +113,7 @@ export default class SearchScreen extends React.Component {
             <ListItem
               item={item}
               onPress={() => this._handleOnItemPress(item, index)}
-              shouldUpdate={text.length != 0}
+              shouldUpdate={text.length > 0 || changed}
             />
           )}
           showsVerticalScrollIndicator={false}
