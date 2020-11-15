@@ -1,5 +1,4 @@
 import CalendarSwitch from "./CalendarSwitch";
-import Content from "./Content";
 import Header from "./Header";
 import InputDialog from "./InputDialog";
 import ListItem from "./ListItem";
@@ -9,7 +8,6 @@ import Searchbar from "./Searchbar";
 
 export {
   CalendarSwitch,
-  Content,
   Header,
   InputDialog,
   ListItem,
