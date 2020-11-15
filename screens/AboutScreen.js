@@ -13,11 +13,16 @@ export default class AboutScreen extends React.Component {
       <View style={styles.container}>
         <Header navigation={navigation} title="About this App" />
         <View style={styles.innerContainer}>
-          <Text style={styles.text}>
-            Forgotten Realms is a trademark of Wizards of the Coast, Inc., a
-            subsidiary of Hasbro, Inc. All Rights Reserved.
+          <Text selectable style={styles.text}>
+            This app is your calendar tool to mark the passage of years in the
+            Forgotten Realms.
             {"\n\n"}
-            Source code is © 2020 by Rodrigo Kuerten.
+            The years are counted using the Dalereckoning (DR) method, and the
+            months and cycle of days represent the Calendar of Harptos, created
+            by a wizard of the same name long ago.
+            {"\n\n"}
+            You'll also find the Roll of the Years here (from -700 DR to 1600
+            DR), as written by Augathra the Mad, a Netherese scholar.
           </Text>
         </View>
       </View>
@@ -36,6 +41,7 @@ const styles = StyleSheet.create({
   text: {
     color: Colors.black,
     fontFamily: "Roboto_medium",
-    fontSize: Theme.responsiveFontSize(15),
+    fontSize: Theme.responsiveFontSize(16),
+    lineHeight: Theme.responsiveFontSize(16) + 4,
   },
 });
