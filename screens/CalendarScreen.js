@@ -11,6 +11,7 @@ import {
   InputDialog,
   LunarMonth,
   Month,
+  MonthsDialog,
 } from "../components";
 import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
@@ -26,6 +27,7 @@ export default class CalendarScreen extends React.Component {
       month: 0,
       year: 2188, //1492 DR
       yearDialog: "",
+      listVisible: false,
       dialogVisible: false,
       useFYear: false,
     };
@@ -52,6 +54,7 @@ export default class CalendarScreen extends React.Component {
       nextState.month !== this.state.month ||
       nextState.lunar !== this.state.lunar ||
       nextState.dialogVisible !== this.state.dialogVisible ||
+      nextState.listVisible !== this.state.listVisible ||
       nextState.yearDialog !== this.state.yearDialog ||
       nextState.useFYear !== this.state.useFYear ||
       nextState.fyear.year !== this.state.fyear.year
@@ -96,6 +99,10 @@ export default class CalendarScreen extends React.Component {
     } else {
       this.setState({ month: month + 1 });
     }
+  };
+
+  _handleSetMonth = (month) => {
+    this.setState({ month, listVisible: false });
   };
 
   _handleYearDialog = () => {
@@ -184,7 +191,7 @@ export default class CalendarScreen extends React.Component {
 
   render() {
     let { navigation } = this.props;
-    let { lunar, month, dialogVisible, yearDialog } = this.state;
+    let { lunar, month, listVisible, dialogVisible, yearDialog } = this.state;
     const isLeapYear = this._isLeapYear();
     const yearLabel = this._getYearLabel();
     const yearName = this._getYearName();
@@ -208,19 +215,23 @@ export default class CalendarScreen extends React.Component {
           }
           visible={dialogVisible}
         />
+        <MonthsDialog
+          onDismiss={() => this.setState({ listVisible: false })}
+          onPressMonth={this._handleSetMonth}
+          visible={listVisible}
+        />
         <View style={styles.innerContainer}>
           <View style={styles.topView}>
             <CalendarSwitch
               onPressLeft={() => this._handleYearDown()}
               onPressRight={() => this._handleYearUp()}
-              onPressText={() =>
-                this.setState({ dialogVisible: !dialogVisible })
-              }
+              onPressText={() => this.setState({ dialogVisible: true })}
               title={yearLabel}
             />
             <CalendarSwitch
               onPressLeft={() => this._handleMonthDown()}
               onPressRight={() => this._handleMonthUp()}
+              onPressText={() => this.setState({ listVisible: true })}
               title={months[month].name}
             />
             {lunar ? (
