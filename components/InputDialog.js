@@ -29,8 +29,12 @@ export default class InputDialog extends React.Component {
           style={styles.dialogWrapper}
           visible={visible}
         >
+          <Dialog.Title>Insert a Year</Dialog.Title>
           <Dialog.Content>
             <TextInput
+              keyboardType={
+                Platform.OS === "ios" ? "numbers-and-punctuation" : "numeric"
+              }
               label="Go to Year"
               mode="outlined"
               onChangeText={onChangeText}
