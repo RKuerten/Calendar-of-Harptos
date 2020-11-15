@@ -1,7 +1,6 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Input, Icon } from "native-base";
+import { StyleSheet, TextInput, View } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
 import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
@@ -11,9 +10,9 @@ const Searchbar = ({
   onClearText = () => {},
   value = "",
 }) => (
-  <View style={styles.inputStyle}>
-    <Icon name="search" style={styles.iconsStyle} type="MaterialIcons" />
-    <Input
+  <View style={styles.inputWrapper}>
+    <MaterialIcons name="search" style={styles.iconsStyle} />
+    <TextInput
       onChangeText={onChangeText}
       placeholder="Search Year by Name"
       placeholderTextColor={Colors.darkGray}
@@ -21,9 +20,11 @@ const Searchbar = ({
       value={value}
     />
     {value.length > 0 && (
-      <TouchableOpacity onPress={onClearText}>
-        <Icon name="close" style={styles.iconsStyle} type="MaterialIcons" />
-      </TouchableOpacity>
+      <MaterialIcons
+        name="close"
+        style={styles.iconsStyle}
+        onPress={onClearText}
+      />
     )}
   </View>
 );
@@ -31,24 +32,25 @@ const Searchbar = ({
 export default Searchbar;
 
 const styles = StyleSheet.create({
-  iconsStyle: {
-    color: Colors.darkGray,
-    marginHorizontal: 5,
-    fontSize: Theme.responsiveFontSize(25),
-    textAlign: "center",
-  },
-  inputStyle: {
-    display: "flex",
-    flexDirection: "row",
+  inputWrapper: {
     alignItems: "center",
+    flexDirection: "row",
     backgroundColor: Colors.white,
     borderBottomWidth: 1,
     borderColor: Colors.dayBorder,
-    color: Colors.black,
     height: 65,
-    padding: 10,
+  },
+  iconsStyle: {
+    color: Colors.darkGray,
+    marginHorizontal: 15,
+    fontSize: Theme.responsiveFontSize(25),
+    textAlign: "center",
   },
   inputText: {
+    flex: 1,
+    color: Colors.black,
     fontFamily: "Roboto_medium",
+    fontSize: 17,
+    paddingRight: 5,
   },
 });
