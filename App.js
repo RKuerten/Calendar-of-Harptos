@@ -46,8 +46,7 @@ async function loadResourcesAsync() {
   await Promise.all([
     Asset.loadAsync([
       require("./assets/images/splash.png"),
-      require("./assets/images/adaptive-background.png"),
-      require("./assets/images/icon-mini.png"),
+      require("./assets/images/adaptive-icon.png"),
     ]),
     Font.loadAsync({
       Roboto: Roboto_400Regular,
