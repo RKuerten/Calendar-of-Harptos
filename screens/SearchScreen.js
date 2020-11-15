@@ -35,9 +35,15 @@ export default class SearchScreen extends React.Component {
     }
   };
 
-  _handleOnItemPress = (index) => {
+  _handleOnItemPress = (item, index) => {
     let { navigation } = this.props;
-    navigation.navigate("Calendar", { year: index });
+    let { text } = this.state;
+    if (text.length === 0) {
+      navigation.navigate("Calendar", { year: index });
+    } else {
+      let newIndex = years.findIndex((yearz) => yearz.year === item.year);
+      navigation.navigate("Calendar", { year: newIndex });
+    }
   };
 
   _handleSearch = (text) => {
@@ -105,8 +111,8 @@ export default class SearchScreen extends React.Component {
           renderItem={({ item, index }) => (
             <ListItem
               item={item}
-              onPress={() => this._handleOnItemPress(index)}
-              shouldUpdate={text.length > 0}
+              onPress={() => this._handleOnItemPress(item, index)}
+              shouldUpdate={text.length != 0}
             />
           )}
           showsVerticalScrollIndicator={false}
