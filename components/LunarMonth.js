@@ -20,13 +20,37 @@ export default class LunarMonth extends React.Component {
     let type = phases.moon[phases.days.findIndex((dayS) => dayS === day)];
 
     if (type === "fm") {
-      return <MaterialCommunityIcons style={styles.icon} name="moon-full" />;
+      return (
+        <MaterialCommunityIcons
+          accessibilityLabel="full moon"
+          style={styles.icon}
+          name="moon-full"
+        />
+      );
     } else if (type === "nm") {
-      return <MaterialCommunityIcons style={styles.icon} name="moon-new" />;
+      return (
+        <MaterialCommunityIcons
+          accessibilityLabel="new moon"
+          style={styles.icon}
+          name="moon-new"
+        />
+      );
     } else if (type === "fq") {
-      return <MaterialCommunityIcons style={styles.icon} name="moon-first-quarter" />;
+      return (
+        <MaterialCommunityIcons
+          accessibilityLabel="first-quarter moon"
+          style={styles.icon}
+          name="moon-first-quarter"
+        />
+      );
     } else if (type === "lq") {
-      return <MaterialCommunityIcons style={styles.icon} name="moon-last-quarter" />;
+      return (
+        <MaterialCommunityIcons
+          accessibilityLabel="last-quarter moon"
+          style={styles.icon}
+          name="moon-last-quarter"
+        />
+      );
     }
   };
 
