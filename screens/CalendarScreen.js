@@ -223,12 +223,16 @@ export default class CalendarScreen extends React.Component {
         <View style={styles.innerContainer}>
           <View style={styles.topView}>
             <CalendarSwitch
+              leftLabel="Decrement year"
+              rightLabel="Increment year"
               onPressLeft={() => this._handleYearDown()}
               onPressRight={() => this._handleYearUp()}
               onPressText={() => this.setState({ dialogVisible: true })}
               title={yearLabel}
             />
             <CalendarSwitch
+              leftLabel="Decrement month"
+              rightLabel="Increment month"
               onPressLeft={() => this._handleMonthDown()}
               onPressRight={() => this._handleMonthUp()}
               onPressText={() => this.setState({ listVisible: true })}

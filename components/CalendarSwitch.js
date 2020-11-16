@@ -8,6 +8,8 @@ import Theme from "../utils/Theme";
 
 export default class CalendarSwitch extends React.Component {
   static defaultProps = {
+    leftLabel: "Minus 1",
+    rightLabel: "Plus 1",
     onPressLeft: () => {},
     onPressRight: () => {},
     onPressText: null,
@@ -15,11 +17,22 @@ export default class CalendarSwitch extends React.Component {
   };
 
   render() {
-    let { onPressText, onPressLeft, onPressRight, title } = this.props;
+    let {
+      leftLabel,
+      rightLabel,
+      onPressText,
+      onPressLeft,
+      onPressRight,
+      title,
+    } = this.props;
 
     return (
       <View style={styles.baseSwitch}>
-        <TouchableOpacity style={styles.switchButton} onPress={onPressLeft}>
+        <TouchableOpacity
+          accessibilityLabel={leftLabel}
+          style={styles.switchButton}
+          onPress={onPressLeft}
+        >
           <MaterialIcons style={styles.switchIcon} name="chevron-left" />
         </TouchableOpacity>
         {onPressText != null ? (
@@ -29,7 +42,11 @@ export default class CalendarSwitch extends React.Component {
         ) : (
           <Text style={styles.switchText}>{title}</Text>
         )}
-        <TouchableOpacity style={styles.switchButton} onPress={onPressRight}>
+        <TouchableOpacity
+          accessibilityLabel={rightLabel}
+          style={styles.switchButton}
+          onPress={onPressRight}
+        >
           <MaterialIcons style={styles.switchIcon} name="chevron-right" />
         </TouchableOpacity>
       </View>
