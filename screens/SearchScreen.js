@@ -48,15 +48,24 @@ export default class SearchScreen extends React.Component {
 
   _handleSearch = (text) => {
     this.setState({ text });
-    let newData = years.filter((year) => {
-      if (
-        year.name.toLowerCase().includes(text.toLowerCase()) ||
-        year.year === text.trim()
-      ) {
-        return year;
-      }
-    });
-    this.setState({ data: newData, loaded: 50 });
+    let searchText = text.toLowerCase().trim();
+
+    if (
+      (searchText.toLowerCase() !== "the" ||
+        searchText.toLowerCase() !== "or" ||
+        searchText.toLowerCase() !== "year") &&
+      searchText.length > 1
+    ) {
+      let newData = years.filter((year) => {
+        if (
+          year.name.toLowerCase().includes(searchText) ||
+          year.year === searchText
+        ) {
+          return year;
+        }
+      });
+      this.setState({ data: newData, loaded: 50 });
+    }
   };
 
   _handleScrollToTop = () => {
