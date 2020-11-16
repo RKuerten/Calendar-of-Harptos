@@ -52,6 +52,7 @@ const DefaultNavigation = () => {
             );
           }
         },
+        tabBarAccessibilityLabel: route.name,
       })}
       tabBarOptions={{
         activeTintColor: "#fff",
