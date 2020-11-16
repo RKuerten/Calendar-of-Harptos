@@ -9,11 +9,11 @@ export default class ListItem extends React.Component {
   static defaultProps = {
     onPress: () => {},
     item: { year: "", name: "" },
-    shouldUpdate: false,
+    textLength: 0,
   };
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.shouldUpdate;
+    return nextProps.textLength !== this.props.textLength;
   }
 
   render() {
