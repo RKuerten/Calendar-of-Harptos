@@ -17,7 +17,9 @@ export default class CreditsScreen extends React.Component {
             Forgotten Realms is a trademark of Wizards of the Coast, Inc., a
             subsidiary of Hasbro, Inc. All Rights Reserved.
             {"\n\n"}
-            Source code is © 2020 by Rodrigo Kuerten.
+            Design and source code are © 2020 by Rodrigo Kuerten.
+            {"\n\n"}
+            Icon artwork by Enrico Tomasetti.
           </Text>
         </View>
       </View>
