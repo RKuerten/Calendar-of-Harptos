@@ -20,12 +20,11 @@ export default class ListItem extends React.Component {
     let { item, onPress } = this.props;
 
     return (
-      <TouchableOpacity
-        style={styles.itemWrapper}
-        onPress={onPress}
-      >
+      <TouchableOpacity style={styles.itemWrapper} onPress={onPress}>
         <Text style={styles.itemTitle}>{item.name}</Text>
-        <Text style={styles.itemDesc}>{`${item.year} DR`}</Text>
+        <Text accessibilityLabel={`${item.year} D.R.`} style={styles.itemDesc}>
+          {`${item.year} DR`}
+        </Text>
       </TouchableOpacity>
     );
   }
