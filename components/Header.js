@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   Platform,
   StyleSheet,
@@ -38,6 +39,11 @@ export default class Header extends React.Component {
     );
   }
 }
+
+Header.propTypes = {
+  hasShadow: PropTypes.bool,
+  title: PropTypes.string,
+};
 
 const styles = StyleSheet.create({
   header: {

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { StyleSheet, Text, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -135,6 +136,15 @@ export default class LunarMonth extends React.Component {
     );
   }
 }
+
+LunarMonth.propTypes = {
+  month: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    holiday: PropTypes.string.isRequired,
+    event: PropTypes.string.isRequired,
+    leap: PropTypes.bool.isRequired,
+  }).isRequired,
+};
 
 const monthBorder = {
   1: {

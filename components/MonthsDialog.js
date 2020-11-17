@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Button, Dialog, Portal } from "react-native-paper";
@@ -62,6 +63,12 @@ export default class MonthsDialog extends React.Component {
     );
   }
 }
+
+MonthsDialog.propTypes = {
+  onDismiss: PropTypes.func.isRequired,
+  onPressMonth: PropTypes.func.isRequired,
+  visible: PropTypes.bool.isRequired,
+};
 
 const styles = StyleSheet.create({
   dialogScrollArea: (windowSize) => ({

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Platform, StyleSheet } from "react-native";
 import { Button, Dialog, Portal, TextInput } from "react-native-paper";
 
@@ -54,6 +55,14 @@ export default class InputDialog extends React.Component {
     );
   }
 }
+
+InputDialog.propTypes = {
+  inputValue: PropTypes.string,
+  onChangeText: PropTypes.func,
+  onComplete: PropTypes.func,
+  onDismiss: PropTypes.func,
+  visible: PropTypes.bool,
+};
 
 const styles = StyleSheet.create({
   inputStyle: {

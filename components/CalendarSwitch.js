@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -53,6 +54,15 @@ export default class CalendarSwitch extends React.Component {
     );
   }
 }
+
+CalendarSwitch.propTypes = {
+  leftLabel: PropTypes.string,
+  rightLabel: PropTypes.string,
+  onPressLeft: PropTypes.func,
+  onPressRight: PropTypes.func,
+  onPressText: PropTypes.func,
+  title: PropTypes.string,
+};
 
 const styles = StyleSheet.create({
   baseSwitch: {

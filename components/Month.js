@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { StyleSheet, Text, View } from "react-native";
 
 import Colors from "../constants/Colors";
@@ -79,6 +80,15 @@ export default class Month extends React.Component {
     );
   }
 }
+
+Month.propTypes = {
+  month: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    holiday: PropTypes.string.isRequired,
+    event: PropTypes.string.isRequired,
+    leap: PropTypes.bool.isRequired,
+  }).isRequired,
+};
 
 const monthBorder = {
   1: {

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { StyleSheet, TextInput, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -28,6 +29,12 @@ const Searchbar = ({
     )}
   </View>
 );
+
+Searchbar.propTypes = {
+  onChangeText: PropTypes.func.isRequired,
+  onClearText: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+};
 
 export default Searchbar;
 

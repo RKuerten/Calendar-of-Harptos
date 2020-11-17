@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { StyleSheet, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
@@ -29,6 +30,12 @@ export default class ListItem extends React.Component {
     );
   }
 }
+
+ListItem.propTypes = {
+  onPress: PropTypes.func,
+  item: PropTypes.object.isRequired,
+  textLength: PropTypes.number.isRequired,
+};
 
 const styles = StyleSheet.create({
   itemWrapper: {
