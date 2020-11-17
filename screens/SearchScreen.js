@@ -65,6 +65,8 @@ export default class SearchScreen extends React.Component {
         }
       });
       this.setState({ data: newData, loaded: 50 });
+    } else if (searchText.length === 0) {
+      this.setState({ data: [...years.slice(0, 50)] });
     }
   };
 
