@@ -14,8 +14,10 @@ export default class CreditsScreen extends React.Component {
         <Header navigation={navigation} title="Credits" />
         <View style={styles.innerContainer}>
           <Text selectable style={styles.text}>
-            Forgotten Realms is a trademark of Wizards of the Coast, Inc., a
-            subsidiary of Hasbro, Inc. All Rights Reserved.
+            Calendar of Harptos is unofficial Fan Content permitted under the
+            Fan Content Policy. Not approved/endorsed by Wizards. Portions of
+            the materials used are property of Wizards of the Coast. ©Wizards of
+            the Coast LLC.
             {"\n\n"}
             Design and source code are © 2020 by Rodrigo Kuerten.
             {"\n\n"}
