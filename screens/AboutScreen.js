@@ -5,6 +5,11 @@ import { Header } from "../components";
 import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
 
+/**
+ * About this app.
+ *
+ * Explain the basic functions of this app in plain text.
+ */
 export default class AboutScreen extends React.Component {
   render() {
     let { navigation } = this.props;
