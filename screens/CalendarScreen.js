@@ -16,23 +16,48 @@ import {
 import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
 
-const yearsMax = years.length; //2296
+/** Constant with the total of named years (2296). */
+const yearsMax = years.length;
 
+/**
+ * The Forgotten Realms' Calendar of Harptos.
+ *
+ * Presents a basic calendar navigation of the fictional Calendar of Harptos,
+ * where the user can go through by per month, per year, or simply jump through
+ * a specific month or year. There's also a switch on the screen that toggles the
+ * visibility of the lunar phase within the calendar.
+ */
 export default class CalendarScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      /** Controls the value of the year when the value is below -700 or higher than 1600. */
       fyear: { year: "", name: "" },
+      /** Controls the lunar phase switch. */
       lunar: false,
+      /** Index of the current month in display (Hammer). */
       month: 0,
-      year: 2188, //1492 DR
+      /** Index of the current year in display (1492). */
+      year: 2188,
+      /** Controls the value of the input of the Year dialog. */
       yearDialog: "",
+      /** Controls whether the Month list dialog is in display. */
       listVisible: false,
+      /** Controls whether the Year input dialog is in display. */
       dialogVisible: false,
+      /** Controls whether fyear should be used for the year index control. */
       useFYear: false,
     };
   }
 
+  /**
+   * Invoked when the component is updated.
+   *
+   * Used when the user comes from the search screen, updating the year index used
+   * for the calendar.
+   *
+   * @param {Object} prevProps The screen's props before the update happened.
+   */
   componentDidUpdate(prevProps) {
     if (prevProps.route.params == null && this.props.route.params != null) {
       this.setState({ year: this.props.route.params.year });
@@ -46,6 +71,17 @@ export default class CalendarScreen extends React.Component {
     }
   }
 
+  /**
+   * Determines if the component should update or not.
+   *
+   * Returns true if the route parameters are not null, or whether the user has changed
+   * the year or month, toggled the lunar phase switch, or opened one of the dialogs.
+   *
+   * @param {Object} nextProps The screen's props of the pending update.
+   * @param {Object} nextState The screen's state of the pending update.
+   *
+   * @returns {boolean} Either should the screen update or not.
+   */
   shouldComponentUpdate(nextProps, nextState) {
     if (nextProps.route.params != null) {
       return true;
@@ -65,6 +101,14 @@ export default class CalendarScreen extends React.Component {
     }
   }
 
+  /**
+   * Returns the year value with the reckoning abbreviation.
+   *
+   * Returns fyear.name if a non-named year is in use. Otherwise, gets the year value and
+   * concatenates it with DR.
+   *
+   * @returns {String} The year value followed by DR.
+   */
   _getYearLabel = () => {
     let { fyear, useFYear, year } = this.state;
     if (useFYear) {
@@ -74,6 +118,14 @@ export default class CalendarScreen extends React.Component {
     }
   };
 
+  /**
+   * Returns the year name whenever possible.
+   *
+   * Returns "fyear.name" if a non-named year is in use (e.g. -702 DR). Otherwise, returns
+   * the year name from the Roll of the Years.
+   *
+   * @return {String} The year name.
+   */
   _getYearName = () => {
     let { fyear, useFYear, year } = this.state;
     if (useFYear) {
@@ -83,6 +135,12 @@ export default class CalendarScreen extends React.Component {
     }
   };
 
+  /**
+   * Decrements the month index value.
+   *
+   * Decrements the month index by 1. If the next index would be lower than 0,
+   * decrements the year index by 1 and sets the month index to 11 (12th month).
+   */
   _handleMonthDown = () => {
     let { month } = this.state;
     if (month - 1 < 0) {
@@ -92,6 +150,12 @@ export default class CalendarScreen extends React.Component {
     }
   };
 
+  /**
+   * Increments the month index value.
+   *
+   * Increments the month index by 1. If the next index would be higher than 11,
+   * increments the year index by 1 and sets the month index to 0 (1st month).
+   */
   _handleMonthUp = () => {
     let { month } = this.state;
     if (month + 1 > 11) {
@@ -101,10 +165,24 @@ export default class CalendarScreen extends React.Component {
     }
   };
 
+  /**
+   * Sets the month index value directly.
+   *
+   * Sets the month index value to the one chosen by the user in the Month list dialog.
+   * It also hides the Month list dialog.
+   * 
+   * @param {Number} month The index of the month chosen.
+   */
   _handleSetMonth = (month) => {
     this.setState({ month, listVisible: false });
   };
 
+  /**
+   * Sets the year index to the one inputted by the user.
+   *
+   * Sets the year index to the one inputted by the user in the Year input dialog.
+   * It also hides the Year input dialog.
+   */
   _handleYearDialog = () => {
     let { yearDialog } = this.state;
     let intYear = parseInt(yearDialog);
@@ -126,6 +204,12 @@ export default class CalendarScreen extends React.Component {
     }
   };
 
+  /**
+   * Decrements the year index value.
+   *
+   * Decrements the year index by 1. If the next index would be lower than 0,
+   * sets useFYear to true and starts using fyear to track the years.
+   */
   _handleYearDown = () => {
     let { fyear, useFYear, year } = this.state;
     if (useFYear) {
@@ -152,6 +236,12 @@ export default class CalendarScreen extends React.Component {
     }
   };
 
+  /**
+   * Increments the year index value.
+   *
+   * Increments the year index by 1. If the next index would be higher than 2295,
+   * sets useFYear to true and starts using fyear to track the years.
+   */
   _handleYearUp = () => {
     let { fyear, useFYear, year } = this.state;
     if (useFYear) {
@@ -178,6 +268,14 @@ export default class CalendarScreen extends React.Component {
     }
   };
 
+  /**
+   * Calculates if a year is leap year or not.
+   *
+   * Returns the positive value of the division of the current year by 4.
+   * The year is considered a leap year if the value is 0.
+   * 
+   * @returns {Number} A value between 0 and 3 (limits included). 
+   */
   _isLeapYear = () => {
     let { fyear, useFYear, year } = this.state;
     let currentYear = 0;
