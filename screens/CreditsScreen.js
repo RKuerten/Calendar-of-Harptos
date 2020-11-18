@@ -5,6 +5,11 @@ import { Header } from "../components";
 import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
 
+/**
+ * Credits of this app.
+ *
+ * Includes the legal statements about the app. 
+ */
 export default class CreditsScreen extends React.Component {
   render() {
     let { navigation } = this.props;
