@@ -7,22 +7,45 @@ import { ListItem, Searchbar } from "../components";
 import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
 
+/**
+ * Search year by name or value.
+ *
+ * Allows the user to search within the named years (the Roll of the Years)
+ * through their name (doesn't need to match) or value (e.g. 1385). If the user
+ * selects one of the listed years, they are redirected to the Calendar screen
+ * with that year as the index.
+ */
 export default class SearchScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      /** The list of years in display. Starts with first 50 years of the named year database. */
       data: [...years.slice(0, 50)],
+      /** Number of currently loaded years in display. */
       loaded: 50,
+      /** Value of the Search bar input. */
       text: "",
     };
+    /** React reference of the FlatList component. */
     this.flatRef = null;
   }
 
+  /**
+   * Clears the Search bar input.
+   *
+   * Clears the Search bar input, resets the data array to its initial state,
+   * and scrolls the FlatList to the top.
+   */
   _handleClearText = () => {
     this.setState({ data: [...years.slice(0, 50)], text: "" });
     this.flatRef.scrollToOffset({ animated: true, offset: 0 });
   };
 
+  /**
+   * Handles the loading of the FlatList data.
+   *
+   * Loads the next 50 entries of the named years database if the Search bar input is empty.
+   */
   _handleLoading = () => {
     let { data, loaded, text } = this.state;
     if (text.length === 0) {
@@ -35,6 +58,11 @@ export default class SearchScreen extends React.Component {
     }
   };
 
+  /**
+   * Handles the user's press interaction on an item of the FlatList.
+   *
+   * Redirects the user to the Calendar screen with the tapped item (year) as a route parameter.
+   */
   _handleOnItemPress = (item, index) => {
     let { navigation } = this.props;
     let { text } = this.state;
@@ -46,6 +74,11 @@ export default class SearchScreen extends React.Component {
     }
   };
 
+  /**
+   * Handles the Search bar input.
+   *
+   * Filters the year database based on the user's input.
+   */
   _handleSearch = (text) => {
     this.setState({ text });
     let searchText = text.toLowerCase().trim();
@@ -66,20 +99,29 @@ export default class SearchScreen extends React.Component {
       });
       this.setState({ data: newData, loaded: 50 });
     } else if (searchText.length === 0) {
-      this.setState({ data: [...years.slice(0, 50)] });
+      this.setState({ data: [...years.slice(0, 50)], loaded: 50 });
     }
   };
 
+  /**
+   * Handles the FAB (floating action button).
+   *
+   * Scrolls to the top of the FlatList. If the Search bar input is empty,
+   * resets the data array to its initial state, otherwise, simply scrolls to the top.
+   */
   _handleScrollToTop = () => {
     let { text } = this.state;
     if (text.length === 0) {
-      this.flatRef.scrollToOffset({ animated: true, offset: 0 });
       this.setState({ data: [...years.slice(0, 50)], loaded: 50 });
-    } else {
-      this.flatRef.scrollToOffset({ animated: true, offset: 0 });
     }
+    this.flatRef.scrollToOffset({ animated: true, offset: 0 });
   };
 
+  /**
+   * Renders the footer of the FlatList.
+   *
+   * Renders a loading spinner if the Search bar input is empty, otherwise renders a simple separator view.
+   */
   _renderFooter = () => {
     let { text, loaded } = this.state;
     if (loaded <= 2297 && text.trim().length === 0) {
