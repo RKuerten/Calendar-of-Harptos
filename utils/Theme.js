@@ -23,6 +23,11 @@ const isTablet = () => {
   }
 };
 
+/**
+ * Returns a font size value appropriated to the screen size.
+ *
+ * Returns a font size value appropriated to the screen size and pixel density.
+ */
 const responsiveFontSize = (fontSize) => {
   let divider = isTablet() ? 600 : 375;
   return Math.round((fontSize * realWidth) / divider);
