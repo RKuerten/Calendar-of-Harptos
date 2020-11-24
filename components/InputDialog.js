@@ -5,12 +5,22 @@ import { Button, Dialog, Portal, TextInput } from "react-native-paper";
 
 import Colors from "../constants/Colors";
 
+/**
+ * Input Dialog component.
+ *
+ * Displays a modal with a single input. Includes the Go to Year / Cancel buttons.
+ */
 export default class InputDialog extends React.Component {
   static defaultProps = {
+    /** The base value of the input. */
     inputValue: "",
+    /** Function that triggers when the input's text changes. */
     onChangeText: () => {},
+    /** Functions that triggers when the user touches the Go to Year button. */
     onComplete: () => {},
+    /** Function that triggers when the user dismisses the modal. */
     onDismiss: () => {},
+    /** Controls whether the modal is visible or not. */
     visible: false,
   };
 

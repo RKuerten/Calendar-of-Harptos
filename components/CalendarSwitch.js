@@ -7,13 +7,25 @@ import { MaterialIcons } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
 
+/**
+ * Calendar Switch component.
+ *
+ * Allows the user to control the current year/month through the arrow icons.
+ * A special function can be attached to the switch label for a specific feature. 
+ */
 export default class CalendarSwitch extends React.Component {
   static defaultProps = {
+    /** Accessibility label of the left arrow icon. */
     leftLabel: "Minus 1",
+    /** Accessibility label of the right arrow icon. */
     rightLabel: "Plus 1",
+    /** Function that triggers when the left arrow icon is pressed. */
     onPressLeft: () => {},
+    /** Function that triggers when the right arrow icon is pressed. */
     onPressRight: () => {},
+    /** Function that triggers when the switch's label is pressed. */
     onPressText: null,
+    /** The switch's label. */
     title: "",
   };
 

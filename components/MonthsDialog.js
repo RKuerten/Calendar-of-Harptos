@@ -9,13 +9,30 @@ import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
 const windowSize = Dimensions.get("window");
 
+/**
+ * Months Dialog component.
+ *
+ * Displays a modal with the list of months. Includes a cancel button.
+ */
 export default class MonthsDialog extends React.Component {
   static defaultProps = {
+    /** Function that triggers when the user dismisses the modal. */
     onDismiss: () => {},
+    /** Function that triggers when the user taps one of the months in the list. */
     onPressMonth: () => {},
+    /** Controls whether the modal is visible or not. */
     visible: false,
   };
 
+  /**
+   * Formats the month index for the list.
+   *
+   * Returns the month index formatted as a two-digit number (with leading 0 when it is lower than 10).
+   *
+   * @param {Number} value The value of the month index.
+   *
+   * @returns {String} The formatted value of the index.
+   */
   _getIndex = (value) => {
     if (value > 9) {
       return value.toString();

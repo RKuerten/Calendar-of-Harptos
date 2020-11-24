@@ -5,12 +5,22 @@ import { StyleSheet, Text, View } from "react-native";
 import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
 
+/**
+ * Month component.
+ *
+ * Renders one of the Harptos' calendar months, in three rows of 10 days.
+ * Includes the holidays between months after the tendays rows, plus solstices and equinoxes. 
+ */
 export default class Month extends React.Component {
   static defaultProps = {
     month: {
+      /** Name of the month in display. */
       name: "",
+      /** Name of the holiday of that month, if any. */
       holiday: "",
+      /** Name of the event of that month, if any. */
       event: "",
+      /** Controls whether or not should Shieldmeet (the leap holiday) should render. */
       leap: false,
     },
   };

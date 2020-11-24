@@ -6,6 +6,11 @@ import { MaterialIcons } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
 
+/**
+ * Search bar component.
+ *
+ * Renders a search bar input, with a search icon on the left and a x icon on the right.
+ */
 const Searchbar = ({
   onChangeText = () => {},
   onClearText = () => {},

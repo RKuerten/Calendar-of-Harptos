@@ -12,9 +12,16 @@ import { MaterialIcons } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
 
+/**
+ * Header component.
+ *
+ * Displays the title of the page. On iOS, displays a back button if possible.
+ */
 export default class Header extends React.Component {
   static defaultProps = {
+    /** Controls if the header show display a shadow or not. */
     hasShadow: true,
+    /** Title of the header. */
     title: "Carregando...",
   };
 

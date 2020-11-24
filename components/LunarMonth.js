@@ -6,16 +6,35 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
 import Theme from "../utils/Theme";
 
+/**
+ * Lunar month component.
+ *
+ * Renders one of the Harptos' calendar months, in three rows of 10 days, with the phases of the moon.
+ * Includes the holidays between months after the tendays rows, plus solstices and equinoxes. 
+ */
 export default class LunarMonth extends React.Component {
   static defaultProps = {
     month: {
+      /** Name of the month in display. */
       name: "",
+      /** Name of the holiday of that month, if any. */
       holiday: "",
+      /** Name of the event of that month, if any. */
       event: "",
+      /** Controls whether or not should Shieldmeet (the leap holiday) should render. */
       leap: false,
     },
   };
 
+  /**
+   * Gets the moon phase associated with that day.
+   *
+   * Returns the icon of the moon phase that matches the type of the day parameter.
+   *
+   * @param {Number} day The value of the day.
+   *
+   * @returns {Element} An Icon with the proper moon phase.
+   */
   _getMoonPhase = (day) => {
     let { phases } = this.props;
     let type = phases.moon[phases.days.findIndex((dayS) => dayS === day)];
